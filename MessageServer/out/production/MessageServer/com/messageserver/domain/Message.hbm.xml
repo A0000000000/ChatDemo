@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.messageserver.domain">
+    <class name="Message" table="t_message">
+        <id name="id" column="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="senderId" column="senderId"/>
+        <property name="receiverId" column="receiverId"/>
+        <property name="content" column="content"/>
+        <property name="sendTime" column="sendTime"/>
+        <property name="status" column="status"/>
+    </class>
+</hibernate-mapping>

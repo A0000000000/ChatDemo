@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.messageserver.domain">
+    <class name="Friend" table="t_friend">
+        <id name="id" column="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="masterId" column="masterId"/>
+        <property name="friendId" column="friendId"/>
+        <property name="createTime" column="createTime"/>
+        <property name="status" column="status"/>
+    </class>
+</hibernate-mapping>

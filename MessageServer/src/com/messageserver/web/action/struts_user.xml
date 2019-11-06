@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <package name="user" extends="struts-default">
+        <action name="checkUsername" class="com.messageserver.web.action.UserAction" method="checkUsername"></action>
+        <action name="register" class="com.messageserver.web.action.UserAction" method="register"></action>
+        <action name="login" class="com.messageserver.web.action.UserAction" method="login"></action>
+        <action name="changePassword" class="com.messageserver.web.action.UserAction" method="changePassword"></action>
+        <action name="logout" class="com.messageserver.web.action.UserAction" method="logout"></action>
+        <action name="getStatus" class="com.messageserver.web.action.UserAction" method="getStatus"></action>
+    </package>
+</struts>
