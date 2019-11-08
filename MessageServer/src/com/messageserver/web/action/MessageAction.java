@@ -2,11 +2,6 @@ package com.messageserver.web.action;
 
 import com.messageserver.domain.Message;
 import com.messageserver.domain.User;
-import com.messageserver.service.MessageService;
-import com.messageserver.service.UserService;
-import com.messageserver.utils.ServiceFactory;
-import com.messageserver.utils.SessionThreadLocal;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,16 +10,11 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-public class MessageAction extends ActionSupport {
+public class MessageAction extends BaseAction<Message> {
 
     private String targetId;
-    private String content;
-
-    private UserService userService = (UserService) ServiceFactory.newServiceInstance("UserService");
-    private MessageService messageService = (MessageService) ServiceFactory.newServiceInstance("MessageService");
 
     public String sendMessage() throws IOException {
-        SessionThreadLocal.openSession();
         HttpSession session = ServletActionContext.getRequest().getSession();
         HttpServletResponse response = ServletActionContext.getResponse();
         User user = (User) session.getAttribute("user");
@@ -34,30 +24,28 @@ public class MessageAction extends ActionSupport {
         Message message = new Message();
         message.setSenderId(user.getId());
         message.setReceiverId(targetId);
-        message.setContent(content);
+        message.setContent(getBean().getContent());
         message.setStatus(1);
         message.setSendTime(new Date());
-        User target = userService.getUserById(targetId);
-        userService.changeStatus(target, target.getStatus() | 2);
-        boolean res = messageService.addNewMessage(message);
+        User target = getUserService().getUserById(targetId);
+        getUserService().changeStatus(target, target.getStatus() | 2);
+        boolean res = getMessageService().addNewMessage(message);
         if(res){
             response.getWriter().write(message.getId()+ "#" + user.getId());
         }else{
             response.getWriter().write("failed");
         }
-        SessionThreadLocal.closeSession();
         return NONE;
     }
 
     public String getNewMessage() throws IOException {
-        SessionThreadLocal.openSession();
         HttpSession session = ServletActionContext.getRequest().getSession();
         HttpServletResponse response = ServletActionContext.getResponse();
         User user = (User) session.getAttribute("user");
         if(user == null){
             response.getWriter().write("error");
         }else {
-            List<Message> messages = messageService.getNewMessageByReceiverId(user.getId());
+            List<Message> messages = getMessageService().getNewMessageByReceiverId(user.getId());
             StringBuffer sb = new StringBuffer();
             sb.append("[");
             boolean flag = false;
@@ -66,7 +54,7 @@ public class MessageAction extends ActionSupport {
                 sb.append(",");
                 flag = true;
                 message.setStatus(0);
-                messageService.saveChange(message);
+                getMessageService().saveChange(message);
             }
             if (flag){
                 sb.deleteCharAt(sb.length() - 1);
@@ -74,7 +62,6 @@ public class MessageAction extends ActionSupport {
             sb.append("]");
             response.getWriter().write(sb.toString());
         }
-        SessionThreadLocal.closeSession();
         return NONE;
     }
 
@@ -86,11 +73,4 @@ public class MessageAction extends ActionSupport {
         this.targetId = targetId;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }

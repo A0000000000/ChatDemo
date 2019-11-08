@@ -2,13 +2,8 @@ package com.messageserver.dao;
 
 import com.messageserver.domain.User;
 
-public interface UserDao extends BaseDao {
+public interface UserDao extends BaseDao<User> {
 
     User selectUserByUsername(String username) throws Exception;
 
-    void insertUser(User user) throws Exception;
-
-    void updateUser(User user) throws Exception;
-
-    User selectUserById(String id) throws Exception;
 }

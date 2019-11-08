@@ -5,8 +5,8 @@
 <struts>
     <package name="friend" extends="struts-default">
 
-        <action name="getNewFriend" class="com.messageserver.web.action.FriendAction" method="getNewFriend"></action>
-        <action name="searchFriend" class="com.messageserver.web.action.FriendAction" method="searchFriend"></action>
-        <action name="addFriend" class="com.messageserver.web.action.FriendAction" method="addFriend"></action>
+        <action name="getNewFriend" class="friendAction" method="getNewFriend"></action>
+        <action name="searchFriend" class="friendAction" method="searchFriend"></action>
+        <action name="addFriend" class="friendAction" method="addFriend"></action>
     </package>
 </struts>

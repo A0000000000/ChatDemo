@@ -4,11 +4,8 @@ import com.messageserver.domain.Message;
 
 import java.util.List;
 
-public interface MessageDao extends BaseDao {
-
-    void insertMessage(Message message) throws Exception;
+public interface MessageDao extends BaseDao<Message> {
 
     List<Message> selectNewMessageByReceiverId(String id) throws Exception;
 
-    void updateChange(Message message) throws Exception;
 }

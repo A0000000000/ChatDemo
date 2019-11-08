@@ -4,7 +4,7 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
     <package name="message" extends="struts-default">
-        <action name="getNewMessage" class="com.messageserver.web.action.MessageAction" method="getNewMessage"></action>
-        <action name="sendMessage" class="com.messageserver.web.action.MessageAction" method="sendMessage"></action>
+        <action name="getNewMessage" class="messageAction" method="getNewMessage"></action>
+        <action name="sendMessage" class="messageAction" method="sendMessage"></action>
     </package>
 </struts>

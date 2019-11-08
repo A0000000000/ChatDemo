@@ -5,7 +5,7 @@ import com.messageserver.domain.User;
 
 import java.util.List;
 
-public interface FriendService extends BaseService {
+public interface FriendService {
 
     List<Friend> getAllFriend(User user);
 

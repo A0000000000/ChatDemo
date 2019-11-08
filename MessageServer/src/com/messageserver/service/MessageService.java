@@ -4,7 +4,7 @@ import com.messageserver.domain.Message;
 
 import java.util.List;
 
-public interface MessageService extends BaseService{
+public interface MessageService {
 
     boolean addNewMessage(Message message);
 

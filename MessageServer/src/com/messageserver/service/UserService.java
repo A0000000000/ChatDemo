@@ -2,7 +2,7 @@ package com.messageserver.service;
 
 import com.messageserver.domain.User;
 
-public interface UserService extends BaseService {
+public interface UserService {
 
     User getUserByUsername(String username);
 
